@@ -22,50 +22,65 @@
             --secondary-color: #10b981; /* M-Pesa Green */
             --dark-color: #0f172a;
             --light-color: #f8fafc;
+            --accent-glow: rgba(37, 99, 211, 0.15);
         }
 
         body {
             background-color: var(--light-color);
             color: var(--dark-color);
             line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Decorative Background Elements */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -10%;
+        /* --- DECORATIONS: Animated Background Orbs --- */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 12s infinite alternate ease-in-out;
+        }
+        .orb-1 {
+            top: -5%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(37, 99, 211, 0.12);
+        }
+        .orb-2 {
+            top: 40%;
+            left: -15%;
+            width: 450px;
+            height: 450px;
+            background: rgba(16, 185, 129, 0.08);
+            animation-delay: -3s;
+        }
+        .orb-3 {
+            bottom: 5%;
             right: -10%;
             width: 400px;
             height: 400px;
-            background: rgba(37, 99, 211, 0.05);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(80px);
+            background: rgba(37, 99, 211, 0.08);
+            animation-delay: -6s;
         }
 
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -10%;
-            left: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(16, 185, 129, 0.05);
-            border-radius: 50%;
-            z-index: -1;
-            filter: blur(80px);
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(40px) scale(1.1); }
         }
 
         /* Navigation */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .nav-container {
@@ -81,6 +96,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -100,46 +116,82 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section */
+        /* Hero Section with Profile Frame */
         .hero {
-            padding: 10rem 2rem 6rem;
+            padding: 11rem 2rem 6rem;
             text-align: center;
-            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* --- DECORATION: Profile Picture Ring --- */
+        .profile-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 2rem;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-glow {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            z-index: 1;
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
 
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             color: var(--dark-color);
+            font-weight: 700;
         }
 
         .hero h1 span {
             color: var(--primary-color);
+            position: relative;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: #64748b;
-            max-width: 600px;
-            margin: 0 auto 2rem;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
         }
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 2.5rem;
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(37, 99, 211, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(37, 99, 211, 0.25);
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 99, 211, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 211, 0.35);
         }
 
         /* Services Section */
@@ -152,50 +204,77 @@
         .section-title {
             text-align: center;
             font-size: 2.2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 3.5rem;
             position: relative;
+            font-weight: 700;
         }
 
         .section-title::after {
             content: '';
             display: block;
-            width: 50px;
+            width: 60px;
             height: 4px;
-            background: var(--primary-color);
-            margin: 10px auto 0;
-            border-radius: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            margin: 12px auto 0;
+            border-radius: 10px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2.5rem;
         }
 
+        /* Decorative Service Cards */
         .service-card {
-            background: #ffffff;
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.06);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #f1f5f9;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(241, 245, 249, 0.8);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            transition: background-color 0.3s;
+        }
+
+        .service-card:hover::before {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 4px -10px rgba(0,0,0,0.01), 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .service-icon {
             font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.15);
         }
 
         .service-card h3 {
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .service-card p {
@@ -205,55 +284,56 @@
 
         /* Billing / M-Pesa Section */
         .billing {
-            background-color: #ffffff;
             padding: 6rem 2rem;
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
         }
 
         .billing-container {
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 3rem 2rem;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-            border: 2px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            border: 1px solid rgba(226, 232, 240, 0.8);
             text-align: center;
         }
 
         .mpesa-logo {
             color: var(--secondary-color);
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
         }
 
         .mpesa-badge {
             display: inline-block;
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.3rem 1.2rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+            padding: 0.4rem 1.5rem;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .billing-details {
             text-align: left;
             background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
+            padding: 1.8rem;
+            border-radius: 16px;
             border: 1px solid #e2e8f0;
             margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         }
 
         .billing-line {
             display: flex;
             justify-content: space-between;
-            padding: 0.5rem 0;
+            padding: 0.7rem 0;
             border-bottom: 1px dashed #e2e8f0;
         }
 
@@ -263,7 +343,7 @@
 
         /* Contact Section */
         .contact {
-            padding: 6rem 2rem;
+            padding: 6rem 2rem 8rem;
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
@@ -274,50 +354,57 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
         .contact-item {
             background: white;
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            min-width: 250px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            padding: 1.8rem 2.5rem;
+            border-radius: 16px;
+            min-width: 265px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
             border: 1px solid #e2e8f0;
             text-decoration: none;
             color: inherit;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
         }
 
         .contact-item:hover {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(37, 99, 211, 0.08);
         }
 
         .contact-item i {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
         }
 
         /* Footer */
         footer {
             background: var(--dark-color);
-            color: #94a3b8;
+            color: #64748b;
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2.3rem; }
             .services-grid { grid-template-columns: 1fr; }
+            .billing-container { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
     <header>
         <div class="nav-container">
@@ -332,6 +419,11 @@
     </header>
 
     <section class="hero" id="home">
+        <div class="profile-container">
+            <div class="profile-glow"></div>
+            <img src="https://github.com/kuriaian951-ui.png" alt="Ian Mwangi" class="profile-pic">
+        </div>
+        
         <h1>Hi, I'm <span>Ian Mwangi</span></h1>
         <p>Professional Freelancer specializing in Graphic Design, Data Entry, and Career Branding Solutions tailored to push your projects forward.</p>
         <a href="#contact" class="btn">Hire Me Now</a>
