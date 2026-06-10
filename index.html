@@ -1,512 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ian Mwangi | Professional Freelance Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* Global & Reset Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ian Kuria - Professional portfolio website showcasing skills, projects, experience, and contact information." />
+  <meta name="author" content="Ian Kuria" />
+  <title>Ian Kuria | Portfolio</title>
 
-        :root {
-            --primary-color: #2563eb; /* Professional Blue */
-            --secondary-color: #10b981; /* M-Pesa Green */
-            --dark-color: #0f172a;
-            --light-color: #f8fafc;
-            --accent-glow: rgba(37, 99, 211, 0.15);
-        }
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111c33;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --muted-2: #94a3b8;
+      --primary: #38bdf8;
+      --secondary: #a78bfa;
+      --accent: #22c55e;
+      --danger: #fb7185;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max-width: 1180px;
+      --transition: 220ms ease;
+    }
 
-        body {
-            background-color: var(--light-color);
-            color: var(--dark-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-soft: #eef2ff;
+      --card: rgba(255, 255, 255, 0.78);
+      --card-border: rgba(15, 23, 42, 0.1);
+      --text: #0f172a;
+      --muted: #334155;
+      --muted-2: #64748b;
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.14);
+    }
 
-        /* --- DECORATIONS: Animated Background Orbs --- */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            animation: float 12s infinite alternate ease-in-out;
-        }
-        .orb-1 {
-            top: -5%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(37, 99, 211, 0.12);
-        }
-        .orb-2 {
-            top: 40%;
-            left: -15%;
-            width: 450px;
-            height: 450px;
-            background: rgba(16, 185, 129, 0.08);
-            animation-delay: -3s;
-        }
-        .orb-3 {
-            bottom: 5%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(37, 99, 211, 0.08);
-            animation-delay: -6s;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(40px) scale(1.1); }
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        /* Navigation */
-        header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 34rem),
+        radial-gradient(circle at top right, rgba(167, 139, 250, 0.2), transparent 32rem),
+        radial-gradient(circle at 50% 70%, rgba(34, 197, 94, 0.1), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 2rem;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent 75%);
+      z-index: -2;
+    }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            letter-spacing: -0.5px;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
-            transition: color 0.3s;
-        }
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
 
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
+    .container {
+      width: min(100% - 40px, var(--max-width));
+      margin-inline: auto;
+    }
 
-        /* Hero Section with Profile Frame */
-        .hero {
-            padding: 11rem 2rem 6rem;
-            text-align: center;
-            position: relative;
-        }
+    .site-header {
+      position: fixed;
+      top: 18px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      pointer-events: none;
+    }
 
-        /* --- DECORATION: Profile Picture Ring --- */
-        .profile-container {
-            position: relative;
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 2rem;
-        }
+    .nav {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.66);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+      transition: background var(--transition), border-color var(--transition);
+    }
 
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 2;
-        }
+    [data-theme="light"] .nav {
+      background: rgba(255, 255, 255, 0.72);
+    }
 
-        .profile-glow {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            width: 170px;
-            height: 170px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            z-index: 1;
-            animation: spin 8s linear infinite;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.35);
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-            font-weight: 700;
-        }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
 
-        .hero h1 span {
-            color: var(--primary-color);
-            position: relative;
-        }
+    .nav-links a {
+      display: inline-flex;
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 650;
+      transition: color var(--transition), background var(--transition);
+    }
 
-        .hero p {
-            font-size: 1.15rem;
-            color: #64748b;
-            max-width: 650px;
-            margin: 0 auto 2.5rem;
-        }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 2.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            box-shadow: 0 4px 20px rgba(37, 99, 211, 0.25);
-            transition: all 0.3s ease;
-        }
+    [data-theme="light"] .nav-links a:hover,
+    [data-theme="light"] .nav-links a.active {
+      background: rgba(15, 23, 42, 0.06);
+    }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 99, 211, 0.35);
-        }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-        /* Services Section */
-        .services {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 3.5rem;
-            position: relative;
-            font-weight: 700;
-        }
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            margin: 12px auto 0;
-            border-radius: 10px;
-        }
+    .menu-btn {
+      display: none;
+    }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2.5rem;
-        }
-
-        /* Decorative Service Cards */
-        .service-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            padding: 3rem 2rem;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(241, 245, 249, 0.8);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: transparent;
-            transition: background-color 0.3s;
-        }
-
-        .service-card:hover::before {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 4px -10px rgba(0,0,0,0.01), 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.15);
-        }
-
-        .service-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .service-card p {
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-
-        /* Billing / M-Pesa Section */
-        .billing {
-            padding: 6rem 2rem;
-        }
-
-        .billing-container {
-            max-width: 550px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 3.5rem 2.5rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            text-align: center;
-        }
-
-        .mpesa-logo {
-            color: var(--secondary-color);
-            font-size: 3.2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            letter-spacing: -2px;
-        }
-
-        .mpesa-badge {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--secondary-color);
-            padding: 0.4rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .billing-details {
-            text-align: left;
-            background: white;
-            padding: 1.8rem;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
-        }
-
-        .billing-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.7rem 0;
-            border-bottom: 1px dashed #e2e8f0;
-        }
-
-        .billing-line:last-child {
-            border-bottom: none;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 6rem 2rem 8rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2.5rem;
-        }
-
-        .contact-item {
-            background: white;
-            padding: 1.8rem 2.5rem;
-            border-radius: 16px;
-            min-width: 265px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(37, 99, 211, 0.08);
-        }
-
-        .contact-item i {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.7rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-color);
-            color: #64748b;
-            text-align: center;
-            padding: 2.5rem;
-            font-size: 0.9rem;
-            border-top: 1px solid #1e293b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 2.3rem; }
-            .services-grid { grid-template-columns: 1fr; }
-            .billing-container { padding: 2rem 1.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-
-    <header>
-        <div class="nav-container">
-            <div class="logo">Ian Mwangi</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#billing">Payment</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <section class="hero" id="home">
-        <div class="profile-container">
-            <div class="profile-glow"></div>
-            <img src="https://github.com/kuriaian951-ui.png" alt="Ian Mwangi" class="profile-pic">
-        </div>
-        
-        <h1>Hi, I'm <span>Ian Mwangi</span></h1>
-        <p>Professional Freelancer specializing in Graphic Design, Data Entry, and Career Branding Solutions tailored to push your projects forward.</p>
-        <a href="#contact" class="btn">Hire Me Now</a>
-    </section>
-
-    <section class="services" id="services">
-        <h2 class="section-title">My Expertise</h2>
-        <div class="services-grid">
-            
-            <div class="service-card">
-                <i class="fa-solid fa-palette service-icon"></i>
-                <h3>Graphics & Design</h3>
-                <p>Custom branding elements, social media graphics, and creative layouts designed to catch eyes and tell your brand's unique story.</p>
-            </div>
-
-            <div class="service-card">
-                <i class="fa-solid fa-scroll service-icon"></i>
-                <h3>Flyer Design</h3>
-                <p>Stunning digital and print-ready flyers for marketing, events, and business promotions that command attention.</p>
-            </div>
-
-            <div class="service-card">
-                <i class="fa-solid fa-file-invoice service-icon"></i>
-                <h3>Professional CV Building</h3>
-                <p>Transforming career histories into modern, ATS-friendly resumes and cover letters that lock in job interviews.</p>
-            </div>
-
-            <div class="service-card">
-                <i class="fa-solid fa-keyboard service-icon"></i>
-                <h3>Accurate Data Entry</h3>
-                <p>Fast, highly disciplined web research, data cleaning, and Excel data management to keep your business records seamlessly organized.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="billing" id="billing">
-        <h2 class="section-title">Simple, Local Billing</h2>
-        <div class="billing-container">
-            <div class="mpesa-logo">M-PESA</div>
-            <span class="mpesa-badge">Preferred Payment Method</span>
-            <p style="color: #64748b; margin-bottom: 1.5rem;">For all freelance contracts and project deposits, payments can securely be processed via Lipa na M-Pesa:</p>
-            
-            <div class="billing-details">
-                <div class="billing-line">
-                    <strong>Payment Type:</strong>
-                    <span>Send Money / Lipa na M-Pesa</span>
-                </div>
-                <div class="billing-line">
-                    <strong>Phone Number:</strong>
-                    <strong>0741102942</strong>
-                </div>
-                <div class="billing-line">
-                    <strong>Registered Name:</strong>
-                    <span>Ian Mwangi</span>
-                </div>
-            </div>
-            <p style="font-size: 0.85rem; color: #94a3b8;">*Please share the M-Pesa confirmation message via Email or WhatsApp upon project initialization.</p>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2 class="section-title">Let's Work Together</h2>
-        <p style="color: #64748b; margin-bottom: 2rem;">Have a project in mind or need a custom quote? Reach out to me directly below.</p>
-        
-        <div class="contact-grid">
-            <a href="mailto:kuriaian951@gmail.com" class="contact-item">
-                <i class="fa-solid fa-envelope"></i>
-                <h3>Email Me</h3>
-                <p>kuriaian951@gmail.com</p>
-            </a>
-            
-            <a href="https://wa.me/254741102942" target="_blank" class="contact-item">
-                <i class="fa-brands fa-whatsapp"></i>
-                <h3>WhatsApp / Call</h3>
-                <p>0741102942</p>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Ian Mwangi. All Rights Reserved.</p>
-    </footer>
-
-</body>
-</html>
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 132px 0 80
