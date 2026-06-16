@@ -26,6 +26,7 @@
       color: var(--ink);
       font-size: 16px;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* ── NAV ── */
@@ -123,8 +124,9 @@
     #github-strip img {
       width: 48px; height: 48px; border-radius: 50%;
       border: 2px solid var(--accent);
+      object-fit: cover;
     }
-    #github-strip .gh-info { flex: 1; }
+    #github-strip .gh-info { flex: 1; min-width: 200px; }
     #github-strip .gh-name {
       font-family: 'Syne', sans-serif;
       color: #f7f5f0; font-weight: 700; font-size: 1rem;
@@ -207,19 +209,40 @@
     }
     .about-img-wrap {
       position: relative;
+      width: 100%;
     }
-    .about-img-placeholder {
-      width: 100%; aspect-ratio: 3/4;
-      background: linear-gradient(135deg, #1a1410, #2b1810);
-      border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
+    .about-profile-frame {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #1a1410;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.05);
     }
-    .about-img-placeholder svg { opacity: 0.3; }
+    .about-profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-name-tag {
+      text-align: center;
+      margin-top: 1rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
     .about-accent-box {
-      position: absolute; bottom: -1.5rem; right: -1.5rem;
+      position: absolute; bottom: 3.5rem; right: -1.5rem;
       background: var(--accent); padding: 1.2rem 1.5rem;
       border-radius: 4px; color: #fff;
+      box-shadow: 0 8px 20px rgba(200,75,47,0.3);
     }
     .about-accent-box strong { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; display: block; }
     .about-accent-box span { font-size: 0.75rem; opacity: 0.8; }
@@ -319,8 +342,8 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      #about { grid-template-columns: 1fr; }
-      .about-accent-box { right: 0; }
+      #about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-accent-box { position: relative; inset: auto; margin-top: 1rem; display: inline-block; }
       .contact-grid { grid-template-columns: 1fr; }
       .gh-stats { gap: 1rem; }
       nav ul { display: none; }
@@ -438,12 +461,10 @@
 <section style="padding: 5rem 5vw;">
   <div id="about">
     <div class="about-img-wrap fade-in">
-      <div class="about-img-placeholder">
-        <svg width="120" height="120" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="8" r="4"/>
-          <path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/>
-        </svg>
+      <div class="about-profile-frame">
+        <img id="about-profile-pic" class="about-profile-img" src="https://github.com/identicons/iankuria.png" alt="Ian Kuria Profile"/>
       </div>
+      <div class="about-name-tag">Ian Kuria</div>
       <div class="about-accent-box">
         <strong>100%</strong>
         <span>Passion-driven</span>
@@ -543,7 +564,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 Ian Kuria. All rights reserved.</p>
+  <p>© <span id="year"></span> Ian Kuria. All rights reserved.</p>
   <div class="footer-links">
     <a href="mailto:kuriaian951@gmail.com">Email</a>
     <a href="https://github.com/iankuria" target="_blank">GitHub</a>
@@ -560,9 +581,15 @@
       const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}`);
       if (!res.ok) throw new Error('Not found');
       const u = await res.json();
-      document.getElementById('gh-avatar').src = u.avatar_url;
+      
+      // Update profile images with the real GitHub picture
+      if (u.avatar_url) {
+        document.getElementById('gh-avatar').src = u.avatar_url;
+        document.getElementById('about-profile-pic').src = u.avatar_url;
+      }
+      
       document.getElementById('gh-name').textContent = u.name || u.login;
-      document.getElementById('gh-bio').textContent = u.bio || 'Creative Developer & Designer';
+      document.getElementById('gh-bio').textContent = u.bio || 'AI Video Editor · CV Builder · Graphic Designer';
       document.getElementById('gh-repos').textContent = u.public_repos;
       document.getElementById('gh-followers').textContent = u.followers;
       document.getElementById('gh-following').textContent = u.following;
@@ -622,6 +649,9 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── SET YEAR ──
+  document.getElementById('year').textContent = new Date().getFullYear();
 
   // ── INIT ──
   fetchGitHub();
