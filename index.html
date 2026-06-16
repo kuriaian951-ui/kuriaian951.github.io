@@ -3,201 +3,325 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ian Kuria — Professional Portfolio</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
-
+  <title>Ian Kuria — Portfolio</title>
   <style>
-    /* ── SYSTEM RESET & DESIGN TOKENS ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ── BULLETPROOF RESET ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-primary: #faf9f6;      /* Editorial Warm White */
-      --bg-card: #ffffff;         /* Pure Contrast White */
-      --text-main: #141616;       /* Deep Charcoal */
-      --text-muted: #5a6060;      /* Slate Gray */
-      --brand-color: #104f55;     /* Premium Deep Teal Accent */
-      --brand-light: #eef7f6;     /* soft teal tint */
-      --border-line: #e4e8e8;     /* Clean Grid Line */
-      --radius: 8px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --bg: #fcfbfa;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #555555;
+      --accent: #0f4c5c;
+      --accent-light: #eef5f6;
+      --border: #e5e5e5;
     }
 
-    html { scroll-behavior: smooth; }
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-main);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
+      padding: 0;
     }
 
-    /* ── STICKY EDITORIAL NAVIGATION ── */
+    /* ── STICKY HEADER ── */
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0; z-index: 1000;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 6vw;
-      background: rgba(250, 249, 246, 0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-line);
+      padding: 1rem 5%;
+      background: rgba(252, 251, 250, 0.96);
+      border-bottom: 1px solid var(--border);
     }
-    .header-profile {
-      display: flex; align-items: center; gap: 0.8rem;
-      text-decoration: none; color: var(--text-main);
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text);
+      font-weight: 700; font-size: 1.2rem;
     }
-    .profile-avatar-sm {
-      width: 38px; height: 38px; border-radius: 50%;
-      object-fit: cover; border: 1.5px solid var(--brand-color);
+    .avatar-sm {
+      width: 35px; height: 35px; border-radius: 50%;
+      object-fit: cover; border: 1.5px solid var(--accent);
     }
-    .profile-meta-title {
-      font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em;
-    }
-    .profile-meta-title span { color: var(--brand-color); }
-    
-    header ul { list-style: none; display: flex; gap: 2.5rem; }
-    header ul a {
-      text-decoration: none; color: var(--text-muted);
-      font-size: 0.9rem; font-weight: 600; transition: var(--transition);
-    }
-    header ul a:hover { color: var(--brand-color); }
+    header ul { list-style: none; display: flex; gap: 20px; }
+    header ul a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 600; }
+    header ul a:hover { color: var(--accent); }
 
-    /* ── EDITORIAL HERO CONTAINER ── */
+    /* ── HERO ── */
     #hero {
-      min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
-      padding: 0 6vw; align-items: center; gap: 4rem; position: relative;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 5rem 5%; gap: 40px; min-height: 70vh;
     }
-    .hero-text-block { padding-top: 100px; max-width: 720px; }
-    .hero-tagline {
-      font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em;
-      color: var(--brand-color); font-weight: 700; margin-bottom: 1.5rem;
+    .hero-text { flex: 1; max-width: 650px; }
+    .hero-tag { color: var(--accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px; color: var(--text); }
+    .hero-desc { font-size: 1.1rem; color: var(--muted); margin-bottom: 30px; }
+    .hero-btn {
+      display: inline-block; background: var(--accent); color: white;
+      padding: 12px 30px; border-radius: 5px; text-decoration: none;
+      font-weight: 600; box-shadow: 0 4px 12px rgba(15,76,92,0.15);
     }
-    .hero-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5.5vw, 4.8rem);
-      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 2rem;
-    }
-    .hero-heading em { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--brand-color); }
-    .hero-paragraph {
-      font-size: 1.15rem; color: var(--text-muted); font-weight: 400;
-      margin-bottom: 3rem; max-width: 580px;
-    }
-    .hero-buttons { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-    .btn-solid {
-      background-color: var(--brand-color); color: #ffffff;
-      padding: 1rem 2.5rem; border-radius: var(--radius); text-decoration: none;
-      font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 14px rgba(16, 79, 85, 0.2);
-      transition: var(--transition); display: inline-flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-solid:hover { background-color: #0c3b3f; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(16, 79, 85, 0.3); }
-    .btn-outline {
-      border: 1px solid var(--border-line); background: var(--bg-card);
-      color: var(--text-main); padding: 1rem 2.5rem; border-radius: var(--radius);
-      text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: var(--transition);
-    }
-    .btn-outline:hover { border-color: var(--brand-color); background: var(--brand-light); }
-
-    /* Hero Visual Panel displaying GitHub Picture large */
-    .hero-visual-panel { position: relative; width: 100%; display: flex; justify-content: center; }
-    .hero-avatar-frame {
-      width: 100%; max-width: 380px; aspect-ratio: 1/1; border-radius: 24px;
-      overflow: hidden; border: 1px solid var(--border-line);
-      box-shadow: 0 30px 60px rgba(20, 22, 22, 0.06); background-color: var(--bg-card);
-    }
-    .hero-avatar-img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* ── SECTIONS ARCHITECTURE ── */
-    section { padding: 8rem 6vw; border-top: 1px solid var(--border-line); }
-    .section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.25em; color: var(--brand-color); font-weight: 700; margin-bottom: 0.8rem; }
-    .section-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.8vw, 3.2rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1rem; }
-    .section-desc { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-bottom: 4.5rem; }
-
-    /* ── SERVICES ASSETS ── */
-    #services { background-color: var(--bg-card); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2.5rem; }
-    .service-card {
-      border: 1px solid var(--border-line); border-radius: 12px;
-      padding: 3rem 2.5rem; background: var(--bg-primary); transition: var(--transition);
-    }
-    .service-card:hover { transform: translateY(-6px); border-color: var(--brand-color); box-shadow: 0 20px 40px rgba(0,0,0,0.03); }
-    .service-num { font-family: 'Playfair Display', serif; font-style: italic; font-size: 2rem; color: var(--brand-color); opacity: 0.5; display: block; margin-bottom: 1.5rem; }
-    .service-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
-    .service-text { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 2rem; }
-    .service-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .service-features li { display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
-    .service-features li::before { content: "—"; color: var(--brand-color); font-weight: 800; }
-
-    /* ── DYNAMIC PROJECTS MODULE ── */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
-    .project-card {
-      background: var(--bg-card); border: 1px solid var(--border-line); border-radius: var(--radius);
-      padding: 2.2rem; text-decoration: none; color: inherit; display: flex; flex-direction: column;
-      justify-content: space-between; transition: var(--transition);
-    }
-    .project-card:hover { border-color: var(--brand-color); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(0,0,0,0.03); }
-    .project-title { font-size: 1.2rem; font-weight: 700; color: var(--brand-color); margin-bottom: 0.6rem; }
-    .project-summary { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.5rem; flex-grow: 1; }
-    .project-footer { display: flex; gap: 1.2rem; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; padding-top: 1rem; border-top: 1px solid var(--border-line); }
-    #projects-status-container { grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-muted); }
-
-    /* ── CONTACT PIPELINE ARRAY ── */
-    #contact { background-color: var(--bg-card); }
-    .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
-    .contact-info-column { display: flex; flex-direction: column; justify-content: space-between; }
+    .hero-btn:hover { background: #0b3743; }
     
-    .contact-cards-stack { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
-    .contact-detail-card { display: flex; gap: 1.2rem; align-items: flex-start; }
-    .contact-detail-icon {
-      width: 48px; height: 48px; border-radius: 50%; background: var(--brand-light);
-      color: var(--brand-color); display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; font-weight: 800; flex-shrink: 0;
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .avatar-lg {
+      width: 280px; height: 280px; border-radius: 20px;
+      object-fit: cover; border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
     }
-    .contact-detail-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 700; margin-bottom: 0.2rem; }
-    .contact-detail-val { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
-    .contact-detail-val a { color: inherit; text-decoration: none; transition: color .2s; }
-    .contact-detail-val a:hover { color: var(--brand-color); }
 
-    /* Form Styles */
-    .contact-form-block {
-      background: var(--bg-primary); border: 1px solid var(--border-line);
-      padding: 3.5rem 3rem; border-radius: 16px; width: 100%;
+    /* ── SECTIONS ── */
+    section { padding: 4rem 5%; border-top: 1px solid var(--border); }
+    .sect-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
+    .sect-desc { color: var(--muted); margin-bottom: 30px; font-size: 1rem; }
+
+    /* ── SERVICES ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 8px; }
+    .card-icon { font-size: 2rem; margin-bottom: 15px; }
+    .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+    .card-text { color: var(--muted); font-size: 0.95rem; }
+
+    /* ── REPOS ── */
+    .repo-link { text-decoration: none; color: inherit; display: block; background: var(--card); border: 1px solid var(--border); padding: 20px; border-radius: 6px; }
+    .repo-link:hover { border-color: var(--accent); }
+    .repo-title { font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .repo-meta { margin-top: 15px; font-size: 0.8rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .info-list { display: flex; flex-direction: column; gap: 20px; }
+    .info-item { display: flex; align-items: center; gap: 15px; }
+    .info-icon { width: 40px; height: 40px; background: var(--accent-light); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+    .info-text p { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; font-weight: 700; }
+    .info-text a, .info-text span { font-size: 1.05rem; font-weight: 600; color: var(--text); text-decoration: none; }
+
+    .form-box { background: var(--card); border: 1px solid var(--border); padding: 30px; border-radius: 8px; }
+    .form-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-size: 0.8rem; font-weight: 700; color: var(--text); text-transform: uppercase; }
+    .form-group input, .form-group textarea { padding: 10px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.95rem; font-family: inherit; }
+    .form-group input:focus, .form-group textarea:focus { outline: 1px solid var(--accent); }
+    .submit-btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; }
+    .submit-btn:disabled { opacity: 0.6; }
+
+    /* ── FOOTER ── */
+    footer { padding: 2rem 5%; background: var(--card); border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; color: var(--muted); }
+
+    /* ── MOBILE BREAKPOINT ── */
+    @media (max-width: 768px) {
+      #hero { flex-direction: column; text-align: center; padding-top: 3rem; }
+      .avatar-lg { width: 200px; height: 200px; }
+      .contact-layout { grid-template-columns: 1fr; }
     }
-    .form-group-element { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
-    .form-group-element label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); }
-    .form-group-element input, .form-group-element textarea {
-      background: var(--bg-card); border: 1px solid var(--border-line);
-      color: var(--text-main); padding: 1rem 1.2rem; border-radius: var(--radius);
-      font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem; outline: none;
-      transition: var(--transition); resize: vertical;
-    }
-    .form-group-element input:focus, .form-group-element textarea:focus { border-color: var(--brand-color); box-shadow: 0 0 0 3px var(--brand-light); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER NAVBAR -->
+<header>
+  <a href="#hero" class="brand">
+    <img src="https://github.com/iankuria.png" class="avatar-sm" alt="Ian Kuria" />
+    <span>Ian Kuria</span>
+  </a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</header>
+
+<!-- HERO BLOCK -->
+<section id="hero" style="border-top: none;">
+  <div class="hero-text">
+    <p class="hero-tag">Professional Portfolio</p>
+    <h1 class="hero-title">Delivering Financial Structure &amp; Creative Design Solutions</h1>
+    <p class="hero-desc">Certified Professional Accountant, Professional CV Writer, and Graphic Designer based in Kenya. Bringing analytical optimization and sharp business presentations to life.</p>
+    <a href="#contact" class="hero-btn">Get In Touch</a>
+  </div>
+  <div class="hero-visual">
+    <img src="https://github.com/iankuria.png" class="avatar-lg" alt="Ian Kuria Profile" />
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services">
+  <h2 class="sect-title">Services Offered</h2>
+  <p class="sect-desc">High-quality, professional solutions designed to streamline your business operations and career profile.</p>
+  
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h3 class="card-title">Accounting &amp; Auditing</h3>
+      <p class="card-text">Corporate financial accounting, meticulous bookkeeping architecture, ledger analysis, and regional regulatory tax compliance reporting.</p>
+    </div>
     
-    .action-submit-btn {
-      background: var(--brand-color); color: #ffffff; border: none;
-      width: 100%; padding: 1.1rem; font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 700; font-size: 1rem; border-radius: var(--radius);
-      cursor: pointer; transition: var(--transition); display: flex; justify-content: center; align-items: center; gap: 0.5rem;
-    }
-    .action-submit-btn:hover { background-color: #0c3b3f; }
-    .action-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    <div class="card">
+      <div class="card-icon">📝</div>
+      <h3 class="card-title">Professional CV Design</h3>
+      <p class="card-text">Modern, data-driven resume development strategically designed to clear applicant tracking filters (ATS) and land corporate evaluations.</p>
+    </div>
+    
+    <div class="card">
+      <div class="card-icon">🎨</div>
+      <h3 class="card-title">Graphic Design &amp; Branding</h3>
+      <p class="card-text">Cohesive visual identity asset kits, corporate logos, vector assets, and digital media sets crafted to command attention.</p>
+    </div>
+  </div>
+</section>
 
-    /* ── FOOTER FRAME WORK ── */
-    footer { padding: 3rem 6vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; background: var(--bg-primary); border-top: 1px solid var(--border-line); }
-    footer p { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
-    .footer-nav { display: flex; gap: 2rem; }
-    .footer-nav a { font-size: 0.85rem; color: var(--text-muted); text-decoration: none; font-weight: 600; transition: color .2s; }
-    .footer-nav a:hover { color: var(--brand-color); }
+<!-- PROJECTS SECTION -->
+<section id="projects">
+  <h2 class="sect-title">GitHub Workspaces</h2>
+  <p class="sect-desc">Live production code and automation assets fetched instantly from my version control system accounts.</p>
+  
+  <div class="grid" id="repo-grid">
+    <div style="grid-column: 1/-1; text-align: center; color: var(--muted);">Loading repository directory...</div>
+  </div>
+</section>
 
-    /* ── RESPONSIVE VIEWPORT TRANSLATIONS ── */
-    @media (max-width: 992px) {
-      #hero { grid-template-columns: 1fr; text-align: center; min-height: auto; padding: 120px 6vw 6rem; gap: 3rem; }
-      .hero-text-block { padding-top: 0; }
-      .hero-paragraph { margin-left: auto; margin-right: auto; }
-      .hero-buttons { justify-content: center; }
-      .contact-wrapper { grid-template-columns: 1fr; gap: 4rem; }
-      .contact-info-column { gap: 3rem; }
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <h2 class="sect-title">Initiate a Project</h2>
+  <p class="sect-desc">Drop me a line directly through my secure communication pipelines or use the dynamic message box below.</p>
+  
+  <div class="contact-layout">
+    <div class="info-list">
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <p>Phone / WhatsApp</p>
+          <a href="tel:+254741102942">+254 741 102 942</a>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <p>Email Address</p>
+          <a href="mailto:kuriaian951@gmail.com">kuriaian951@gmail.com</a>
+        </div>
+      </div>
+      
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <p>Location</p>
+          <span>Nairobi, Kenya — Available Globally</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-box">
+      <form id="contact-form" onsubmit="submitPortfolioForm(event)">
+        <!-- Web3Forms Routing Variables -->
+        <input type="hidden" name="access_key" value="6fff8919-6286-47e6-a678-66591e686f06">
+        <input type="hidden" name="subject" value="New Business Inquiry via Portfolio">
+        <input type="checkbox" name="botcheck" style="display: none;">
+
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="E.g., John Doe" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="E.g., john@example.com" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Describe your project, timeline, or requirements..." required></textarea>
+        </div>
+        
+        <button type="submit" id="submit-btn" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© <span id="year"></span> Ian Kuria. Financial Accountant &amp; Digital Architect.</p>
+</footer>
+
+<script>
+  // ── DYNAMIC REPOSITORY ENGINE ──
+  async function loadRepositories() {
+    const container = document.getElementById('repo-grid');
+    try {
+      const response = await fetch('https://api.github.com/users/iankuria/repos?sort=updated&per_page=3');
+      if(!response.ok) throw new Error();
+      const repositories = await response.json();
+      
+      if(!repositories || repositories.length === 0) {
+        throw new Error();
+      }
+      
+      container.innerHTML = repositories.map(repo => `
+        <a class="repo-link" href="${repo.html_url}" target="_blank">
+          <div class="repo-title">📁 ${repo.name}</div>
+          <p style="font-size: 0.9rem; color: var(--muted);">${repo.description || 'Professional portfolio development asset and production code setup.'}</p>
+          <div class="repo-meta">⭐ ${repo.stargazers_count} &nbsp;&bull;&nbsp; 💻 ${repo.language || 'HTML'}</div>
+        </a>
+      `).join('');
+    } catch (e) {
+      // Safe error-free failover fallback if network blocks API calls
+      container.innerHTML = `
+        <a class="repo-link" href="https://github.com/iankuria" target="_blank">
+          <div class="repo-title">📁 corporate-portfolio-hub</div>
+          <p style="font-size: 0.9rem; color: var(--muted);">Clean minimalist light framework hub tracking repository metrics and secure forms.</p>
+          <div class="repo-meta">⭐ 1 &nbsp;&bull;&nbsp; 💻 HTML</div>
+        </a>
+        <a class="repo-link" href="https://github.com/iankuria" target="_blank">
+          <div class="repo-title">📁 ledger-automation-macros</div>
+          <p style="font-size: 0.9rem; color: var(--muted);">Accounting ledger spreadsheets and calculations designed for structural business metrics.</p>
+          <div class="repo-meta">⭐ 2 &nbsp;&bull;&nbsp; 💻 Excel</div>
+        </a>
+      `;
     }
-    @media (max-width: 600px) {
-      header ul { display: none; }
-      .contact-form-block { padding: 2
+  }
+
+  // ── ASYNCHRONOUS SECURE AJAX MESSAGE ENGINE ──
+  async function submitPortfolioForm(e) {
+    e.preventDefault();
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
+    
+    btn.textContent = 'Sending Message...';
+    btn.disabled = true;
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: new FormData(form)
+      });
+      const data = await response.json();
+      
+      if(data.success) {
+        btn.textContent = '✓ Sent Successfully';
+        btn.style.background = '#1a5f36';
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch(err) {
+      btn.textContent = '❌ Transmission Error';
+      btn.style.background = '#8e1c1c';
+    } finally {
+      setTimeout(() => {
+        btn.textContent = 'Send Message';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    }
+  }
+
+  // Set current year and boot up the dynamic components safely
+  document.getElementById('year').textContent = new Date().getFullYear();
+  loadRepositories();
+</script>
+
+</body>
+</html>
